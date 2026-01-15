@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,7 +25,7 @@ public class StudentController {
         studentService.deleteStudent(id);
     }
     @GetMapping("/search-student/{id}")
-    public Optional<StudentDto> searchStudent(@PathVariable Integer id){
+    public StudentDto searchStudent(@PathVariable Integer id){
         return studentService.searchStudent(id);
     }
 }
