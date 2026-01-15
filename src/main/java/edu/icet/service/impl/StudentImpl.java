@@ -31,6 +31,8 @@ public class StudentImpl implements StudentService {
 
     @Override
     public StudentDto searchStudent(Integer id) {
-        return studentMapper.toDto(repository.findById(id).get());
+        return repository.findById(id)
+                .map(studentMapper::toDto)
+                .orElseThrow(()->new RuntimeException("Student not found"));
     }
 }

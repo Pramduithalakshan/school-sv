@@ -16,7 +16,7 @@ public class StudentController {
     public void addStudent(@RequestBody StudentDto student){
         studentService.addStudent(student);
     }
-
+    @GetMapping("/get-students")
     public List<StudentDto> getStudent(){
         return studentService.getStudent();
     }
