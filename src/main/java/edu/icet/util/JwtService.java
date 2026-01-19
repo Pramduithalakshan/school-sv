@@ -19,7 +19,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class JwtService {
     @Value("${SECRET_KEY}")
-    private final String secretKey;
+    private String secretKey;
     public String generateToken(String username){
         Map<String,Object> claims = new HashMap<>();
         return createToken(claims,username);
