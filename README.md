@@ -524,7 +524,7 @@ The JAR file will be created at `target/school-sv-1.0-SNAPSHOT.jar`
 
 ## 📞 Support
 
-For support, email your-email@example.com or create an issue in the repository.
+For support, email info.pramudithalakshan@example.com or create an issue in the repository.
 
 ---
 
