@@ -5,13 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class GradeDto {
+public class EmployeeDto {
     private Integer id;
-    private String name;
-    private Integer orderNo;
-    private Boolean isActive;
+    private String role;
+    private Date joinedDate;
+    private Double basicSalary;
+    private Double allowances;
+    private Integer backAccount;
 }

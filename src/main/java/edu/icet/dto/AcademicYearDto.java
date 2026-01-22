@@ -5,13 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class GradeDto {
+public class AcademicYearDto {
     private Integer id;
-    private String name;
-    private Integer orderNo;
+    private Integer yearLabel;
+    private Date startDate;
+    private Date endDate;
     private Boolean isActive;
 }

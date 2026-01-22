@@ -6,24 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class StudentDto {
+public class TeacherDto {
     private Integer id;
-    private Integer classId;
-    private String firstName;
-    private String lastName;
-    private Date dateOfBirth;
+    private String name;
     private String gender;
-    private String address;
     private String contact;
     private String email;
-    private Date enrollmentDate;
+    private String qualification;
+    private Date hireDate;
+    private Boolean isActive;
+    private Integer mediumId;
+    private Integer typeId;
+    private Integer subjectId;
+    private Integer employeeId;
     private Integer schoolId;
-    private Integer hostelId;
-    private Integer clubId;
-    private Integer socityId;
 }

@@ -1,5 +1,8 @@
-package edu.icet.dto;
+package edu.icet.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,9 +12,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class GradeDto {
+@Entity
+@Table(name = "societies")
+public class Society {
+    @Id
     private Integer id;
     private String name;
-    private Integer orderNo;
-    private Boolean isActive;
 }
