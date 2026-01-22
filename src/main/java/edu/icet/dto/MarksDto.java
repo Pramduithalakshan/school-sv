@@ -9,9 +9,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class GradeDto {
+public class MarksDto {
     private Integer id;
-    private String name;
-    private Integer orderNo;
-    private Boolean isActive;
+    private Integer studentId;
+    private Integer examId;
+    private Integer marks;
+    private String grade;
 }

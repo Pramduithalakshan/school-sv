@@ -5,13 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class GradeDto {
+public class StudentAttendance {
     private Integer id;
-    private String name;
-    private Integer orderNo;
-    private Boolean isActive;
+    private Integer studentId;
+    private Date date;
+    private Boolean isAttend;
 }

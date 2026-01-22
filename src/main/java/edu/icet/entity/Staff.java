@@ -1,5 +1,8 @@
-package edu.icet.dto;
+package edu.icet.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,19 +14,17 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class StudentDto {
+@Entity
+@Table(name = "staffs")
+public class Staff {
+    @Id
     private Integer id;
-    private Integer classId;
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
     private String gender;
+    private Date dateOfBirth;
     private String address;
     private String contact;
     private String email;
-    private Date enrollmentDate;
-    private Integer schoolId;
-    private Integer hostelId;
-    private Integer clubId;
-    private Integer socityId;
+    private Integer employeeId;
 }
