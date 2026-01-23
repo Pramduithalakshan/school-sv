@@ -12,6 +12,5 @@ import lombok.ToString;
 public class GradeDto {
     private Integer id;
     private String name;
-    private Integer orderNo;
     private Boolean isActive;
 }

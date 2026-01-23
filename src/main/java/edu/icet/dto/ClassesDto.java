@@ -13,6 +13,5 @@ public class ClassesDto {
     private Integer id;
     private Integer gradeId;
     private String name;
-    private Integer academicYearId;
     private Boolean isActive;
 }
