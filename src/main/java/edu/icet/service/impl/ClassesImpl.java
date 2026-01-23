@@ -1,37 +1,48 @@
 package edu.icet.service.impl;
 
 import edu.icet.dto.ClassesDto;
-import edu.icet.entity.Classes;
-import edu.icet.mapper.ClassMapper;
-import edu.icet.repository.ClassesRepository;
 import edu.icet.service.ClassesService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ClassesImpl implements ClassesService {
-    private final ClassesRepository repository;
-    private final ClassMapper classMapper;
+    private final JdbcTemplate jdbcTemplate;
     @Override
-    public void addClass(ClassesDto classesDto) {
-       repository.save(classMapper.toEntity(classesDto));
+    public void addClass(ClassesDto dto) {
+        String sql = "INSERT INTO grades (id," +
+                ",grade_id,class_name,isActive) VALUES" +
+                "(?,?,?,?)";
+        jdbcTemplate.update(sql,
+                dto.getId(),
+                dto.getGradeId(),
+                dto.getName(),
+                dto.getIsActive()
+        );
     }
 
     @Override
     public List<ClassesDto> getClasses() {
-        return classMapper.toDtoList(repository.findAll());
+        String sql = "SELECT * FROM classes";
+        return jdbcTemplate.query(sql,new BeanPropertyRowMapper<>());
     }
 
     @Override
     public ClassesDto searchClass(Integer id) {
-        Classes classes = repository.findById(id).orElseThrow(() ->new RuntimeException("class not found"));
-        return classMapper.toDto(classes);
+        String sql = "SELECT * FROM classes WHERE id=?";
+        return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(ClassesDto.class),id);
     }
 
     @Override
     public void deleteClass(Integer id) {
-        repository.deleteById(id);
+        String sql = "DELETE FROM classes WHERE id=?";
+        int rowAffected = jdbcTemplate.update(sql,id);
+        if (rowAffected==0){
+            throw new IllegalArgumentException("Class not found with id"+ id);
+        }
     }
 }

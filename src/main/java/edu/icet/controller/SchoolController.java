@@ -26,7 +26,7 @@ public class SchoolController {
         schoolService.deleteSchool(id);
     }
     @GetMapping("/search-school")
-    public SchoolDto searchStudent(Integer id) {
-        return schoolService.searchSchool(id);
+    public void searchStudent(Integer id) {
+        schoolService.searchSchool(id);
     }
 }

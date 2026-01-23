@@ -8,9 +8,10 @@ import edu.icet.security.ApplicationConfig;
 import edu.icet.service.AuthenticationService;
 import edu.icet.util.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final ApplicationConfig applicationConfig;
+    private final JdbcTemplate jdbcTemplate;
     @Override
     public AuthenticationResponse register(UserDto userDto) {
         User user =  User.builder()
@@ -28,7 +30,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .password(applicationConfig.passwordEncoder().encode(userDto.getPassword()))
                 .role(userDto.getRole())
                 .build();
-        repository.save(user);
+        String sql = "INSERT INTO users(id,username,password,role) VALUES(?,?,?,?)";
+        jdbcTemplate.update(sql,
+                user.getId(),
+                user.getUsername(),
+                user.getPassword(),
+                user.getRole()
+                );
 
         String jwtToken = jwtService.generateToken(user.getUsername());
         return AuthenticationResponse.builder()
@@ -42,9 +50,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 new UsernamePasswordAuthenticationToken(userDto.getUsername(),userDto.getPassword()
                 )
         );
-        User user = repository.findByUsername(userDto.getUsername())
-                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
+        String sql = "SELECT * FROM users WHERE username=?";
+        User user = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), userDto.getUsername());
 
+        assert user != null;
         String jwtToken = jwtService.generateToken(user.getUsername());
         return AuthenticationResponse.builder()
                 .token(jwtToken)

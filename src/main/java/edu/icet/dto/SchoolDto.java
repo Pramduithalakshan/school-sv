@@ -20,7 +20,6 @@ public class SchoolDto {
     private String webSiteUrl;
     private String contact;
     private Integer principleId;
-    private Integer mediumId;
     private String vision;
     private String mission;
     private String flag;

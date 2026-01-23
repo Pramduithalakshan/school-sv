@@ -1,10 +1,17 @@
 package edu.icet.repository;
 
 import edu.icet.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
-public interface UserRepository extends JpaRepository<User,Integer> {
-    Optional<User> findByUsername(String username);
+@RequiredArgsConstructor
+@Repository
+public class UserRepository {
+    private final JdbcTemplate jdbcTemplate;
+    public User findByUsername(String username){
+        String sql = "SELECT * FROM users WHERE username=?";
+        return jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<>(User.class),username);
+    }
 }
